@@ -1,0 +1,73 @@
+//servlet7b.java
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+@WebServlet("/Servlet7b")
+public class Servlet7b extends HttpServlet {
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+throws ServletException, IOException {
+response.setContentType("text/html");
+PrintWriter out = response.getWriter();
+String fname = request.getParameter("f1");
+System.out.println(fname);
+File f = new File(fname);
+if (f.exists())
+{
+out.println(f.getName());
+out.println("<hr size='2'style='color:green'>");
+out.println("Contents of the file is:<br>");
+out.println("<hr size='2' style='color:green'/><br>");
+BufferedReader in = new BufferedReader(new FileReader(f));
+String buf = "";
+while ((buf = in.readLine()) != null)
+{
+out.write(buf);
+out.flush();
+out.println("<br>");
+}
+in.close();
+out.println("<hr size='3'style='color:red'></font></p></body>\n</html>");
+}
+else
+{
+out.println("Filename:" + fname);
+out.println("<h1>File doesn't exist</h1>\n");
+}
+}
+}
+
+
+//prog7b.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Prog7b</title>
+</head>
+<script type="text/javascript">
+function validate() {
+if (document.form1.f1.value == "")
+alert("First click on browse and select the file");
+else
+document.from1.submit();
+}
+</script>
+<body bgcolor="lightblue">
+<form name="form1" method="get"
+action="http://localhost:8080/project_name/servlet7b">
+<p>
+<center>
+<br />
+<h1>File Download Program</h1>
+<br />
+<h3>Click on browse and select the file</h3>
+<br /> <input type="file" name="f1"> <br />
+<br /> <input type="submit" value="Click to start downloading"
+onclick="validate()">
+</center>
+</p>
+</form>
+</body>
+</html>
