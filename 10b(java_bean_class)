@@ -1,0 +1,95 @@
+package beans;
+
+
+
+prog10b.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+        <title>Student Information</title>
+  </head>
+   <body bgcolor=orange>
+    <form action="http://localhost:8080/ProjectName/First.jsp" method="post">
+    <center>
+        <h1>student information</h1>
+        <h3>
+            USN :<input type="text" name="usn" size=20 /><br>
+            Student Name :<input type="text" name="sname" size=20/><br>
+            Total Marks :<input type="text" name="smarks" size=20/><br>
+            <br><input type="submit" value="DISPLAY" />
+        </h3>
+    </center>
+    </form>
+   </body>
+</html>
+
+
+
+
+Display.jsp
+
+
+<html>
+    <head>
+        <title>Student Information</title>
+    </head>
+    <body bgcolor=pink>
+    <jsp:useBean id="student" scope="request" class="beans.Student" />
+    <h2>Entered Student Information</h2>
+    <br>
+    <br>
+    <h3>
+    Student Name :<jsp:getProperty name="student" property="sname" /><br>
+    USN :<jsp:getProperty name="student" property="usn" /><br>
+    Total Marks :<jsp:getProperty name="student" property="smarks" />
+    </h3>
+    </body>
+</html>
+
+
+
+
+First.jsp
+
+<html>
+  <head>
+      <title>Student Information</title>
+  </head>
+  <body>
+      <jsp:useBean id="student" scope="request" class="beans.Student" />
+      <jsp:setProperty name="student" property="*" />
+      <jsp:forward page="Display.jsp" />
+  </body>
+</html>
+
+
+
+
+Student.java
+
+public class Student implements java.io.Serializable {
+        public String sname;
+        public String usn;
+        public int smarks;
+        public Student() {
+        }
+        public void setsname(String e) {
+        sname = e;
+        }
+        public String getsname() {
+        return sname;
+        }
+        public void setusn(String en) {
+        usn = en;
+        }
+        public String getusn() {
+        return usn;
+        }
+        public void setsmarks(int m) {
+        smarks = m;
+        }
+        public int getsmarks() {
+        return smarks;
+        }
+}
